@@ -52,4 +52,21 @@ class MatchesTest extends TestCase
     }
 
 
+    /**
+     * Test a move.
+     */
+    public function testMakeMoveMatches()
+    {
+        $id_match = Matches::create([
+            'name_match' =>'Match',
+            'next' => 0,
+            'winner' => 0,
+            'board' => '0,0,0,0,0,0,0,0,0'
+        ]);
+
+        $answer = $this->put('api/match/'.$id_match, ["position" => 2]);
+        $answer->assertStatus(200);
+    }
+
+
 }
