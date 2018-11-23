@@ -45,11 +45,11 @@ class Matches extends Model
             $match->winner = $this->checkWinner($board);
             $match->save();
 
-            return array("id" => $match->id_match,
+            return ["id" => $match->id_match,
                          "name" => $match->name_match,
                          "next" => $match->next,
                          "winner" => $match->winner,
-                         "board" => $board);
+                         "board" => $board];
         }
 
         return null;
