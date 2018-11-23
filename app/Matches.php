@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Matches extends Model
 {
     protected $table = "matches";
-
+    protected $fillable = ['name_match', 'next', 'winner', 'board'];
 
     /*
      * Gets a match by the id, in this return the board is ready to be used as an array
@@ -33,24 +33,23 @@ class Matches extends Model
         $match = $this->getMatchById($id_match);
 
         if ($match) {
-            // $board receive the match from db
-            $board = $match->board;
-            // $board receive the current player in the move position
+            // $board receive the board as an array
+            $board = $this->changesBoardToArray($match->board);
+            // $board receive the current player in the move position to change it
             $board[$position] = $match->next;
             // return the updated board to db
             $match->board = implode(",",$board);
             //change the player
             $match->next = ($match->next == 1) ? 2 : 1;
             //check if there is a winner and changes it
-            $match->winner = $this->checkWinner($match->board);
+            $match->winner = $this->checkWinner($board);
             $match->save();
-            $match->board = $this->changesBoardToArray($match->board);
 
             return array("id" => $match->id_match,
                          "name" => $match->name_match,
                          "next" => $match->next,
                          "winner" => $match->winner,
-                         "board" => $match->board);
+                         "board" => $board);
         }
 
         return null;

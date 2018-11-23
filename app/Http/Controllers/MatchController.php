@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Input;
 use App\Http\Controllers\Controller;
-use Illuminate\Database\Eloquent\Relations;
 
 
 use App\Matches;
@@ -69,16 +68,9 @@ class MatchController extends Controller {
      */
     public function create() {
         $last_match = Matches::orderByDesc('id_match')->first();
-
-        /*$data = new Matches();
-        $data->name_match = 'Match '.($last_match)?$last_match->id + 1 : 1;
-        $data->next = 0;
-        $data->winner = 0;
-        $data->board = '0,0,0,0,0,0,0,0,0'
-        $data->save();*/
-
+        $name_match = ($last_match)?$last_match->id + 1 : 1;
         Matches::create([
-            'name_match' => 'Match '.($last_match)?$last_match->id + 1 : 1,
+            'name_match' =>'Match '.$name_match,
             'next' => 0,
             'winner' => 0,
             'board' => '0,0,0,0,0,0,0,0,0'

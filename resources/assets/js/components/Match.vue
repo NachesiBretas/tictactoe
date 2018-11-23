@@ -92,12 +92,12 @@
                 }
             },
             back() {
-                //clearTimeout(this.timeout);
+                clearTimeout(this.timeout);
                 this.$emit('showMatches');
             }
         },
         mounted() {
-            //this.timeout = setTimeout(this.load, RELOAD_TIME / 3);
+            this.timeout = setTimeout(this.load, RELOAD_TIME / 3);
         }
     }
 </script>
