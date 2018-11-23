@@ -86,7 +86,8 @@ class MatchController extends Controller {
      * @return \Illuminate\Http\JsonResponse
      */
     public function delete($id) {
-        Matches::destroy($id);
+        //Matches::destroy($id);
+        Matches::where('id_match',$id)->delete();
 
         return response()->json($this->listAllMatches());
     }

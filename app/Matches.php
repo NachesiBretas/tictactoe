@@ -16,8 +16,8 @@ class Matches extends Model
     public function getMatchById($id)
     {
         $match = parent::find($id);
+        //$match = parent::where('id_match',$id)->get();
         if($match){
-
             $match->board = $this->changesBoardToArray($match->board);
             return $match;
         }
